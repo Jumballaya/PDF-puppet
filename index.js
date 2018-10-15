@@ -1,6 +1,5 @@
-/**
- * PDF Maker
- */
+#!/usr/bin/env node
+
 const program = require('commander');
 const generatePDF = require('./src/generatePDF');
 

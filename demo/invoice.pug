@@ -1,0 +1,17 @@
+html
+  body
+    h1 Invoice for #{company}
+    p This is some text
+    table
+      thead
+        tr
+          each val in table.header
+            th= val
+
+      tbody
+        each row in table.body
+          tr
+            each col in row
+              th= col
+
+    h3 Total: #{total}

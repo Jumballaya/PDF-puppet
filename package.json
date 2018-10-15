@@ -1,0 +1,18 @@
+{
+  "name": "pdf-maker",
+  "version": "1.0.0",
+  "description": "generate PDFs from HTML templates",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Patrick Burris",
+  "license": "ISC",
+  "dependencies": {
+    "commander": "^2.19.0",
+    "js-yaml": "^3.12.0",
+    "node-sass": "^4.9.4",
+    "pug": "^2.0.3",
+    "puppeteer": "^1.9.0"
+  }
+}

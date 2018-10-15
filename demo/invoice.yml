@@ -1,0 +1,22 @@
+title: invoice
+template: invoice.pug
+styles: invoice.scss
+
+data:
+  company: Test Client
+  table:
+    header:
+      - Milestone
+      - Date Completed
+      - Price
+    body:
+      - - Design website
+        - 09/14/18
+        - $800
+      - - First prototype
+        - 09/21/18
+        - $1200
+      - - Final website
+        - 10/14/18
+        - $2500
+  total: $4000

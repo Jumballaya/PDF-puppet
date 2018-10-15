@@ -1,13 +1,14 @@
 {
-  "name": "pdf-maker",
-  "version": "1.0.0",
+  "name": "pdf-puppet",
+  "version": "0.0.1",
   "description": "generate PDFs from HTML templates",
+  "author": "Patrick Burris",
+  "license": "ISC",
+  "github": "https://github.com/Jumballaya/PDF-puppet",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Patrick Burris",
-  "license": "ISC",
   "dependencies": {
     "commander": "^2.19.0",
     "js-yaml": "^3.12.0",

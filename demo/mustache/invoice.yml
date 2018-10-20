@@ -1,0 +1,8 @@
+title: invoice
+template: invoice.mustache
+styles: invoice.scss
+markupEngine: mustache
+
+data:
+  company: Test Client
+  total: $4000

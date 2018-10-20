@@ -2,8 +2,10 @@
  * Markup Generation
  *
  */
+const fs = require('fs');
 const pug = require('pug');
 const Twig = require('twig');
+const Mustache = require('mustache');
 const sass = require('node-sass');
 
 /**
@@ -31,6 +33,11 @@ const selectMarkupEngine = opts => {
     // Pug
     case 'pug':
       return PUG;
+
+    // Mustache
+    case 'mustache':
+      return async (template, data) =>
+        Mustache.render(fs.readFileSync(template).toString(), data);
 
     // Default
     default:

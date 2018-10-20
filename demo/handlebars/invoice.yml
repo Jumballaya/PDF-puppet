@@ -1,0 +1,8 @@
+title: invoice
+template: invoice.hbs
+styles: invoice.scss
+markupEngine: handlebars
+
+data:
+  company: Test Client
+  total: $4000

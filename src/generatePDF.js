@@ -16,14 +16,18 @@ module.exports = async (configFile, out) => {
     console.log('YAML file could not be read');
     return;
   }
+
+  console.log('Generating markup...');
   const markup = await generateMarkup(opts);
+
   const browser = await puppeteer.launch();
   const page = await browser.newPage();
   await page.goto(`data:text/html, ${markup}`);
 
+  console.log('Generating PDF...\n');
   await page.pdf({
     path: out,
-    format: 'A4',
+    format: configFile.format || 'A4',
     printBackground: true,
   });
 

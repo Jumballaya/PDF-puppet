@@ -1,0 +1,4 @@
+title: invoice
+template: invoice.html
+styles: invoice.scss
+markupEngine: html

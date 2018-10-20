@@ -1,6 +1,7 @@
 title: invoice
 template: invoice.pug
 styles: invoice.scss
+markupEngine: pug
 
 data:
   company: Test Client

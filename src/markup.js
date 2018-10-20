@@ -2,23 +2,23 @@
  * Markup Generation
  *
  */
-const fs = require('fs');
 const pug = require('pug');
 const Twig = require('twig');
 const Mustache = require('mustache');
+const Handlebars = require('handlebars');
 const sass = require('node-sass');
+
+const { readFile } = require('./util');
 
 /**
  * Select Markup Engine
  *
  */
 const selectMarkupEngine = opts => {
+  // Get the markup engine from the options
   const engine = opts.markupEngine ? opts.markupEngine.toLowerCase() : null;
-  const PUG = async (template, data) =>
-    pug.renderFile(template, {
-      doctype: 'html',
-      ...data,
-    });
+
+  // Select correct template engine
   switch (engine) {
     // Twig
     case 'twig':
@@ -32,16 +32,25 @@ const selectMarkupEngine = opts => {
 
     // Pug
     case 'pug':
-      return PUG;
+      return async (template, data) =>
+        pug.renderFile(template, {
+          doctype: 'html',
+          ...data,
+        });
 
     // Mustache
     case 'mustache':
       return async (template, data) =>
-        Mustache.render(fs.readFileSync(template).toString(), data);
+        Mustache.render(await readFile(template), data);
 
-    // Default
+    // Handlebars
+    case 'handlebars':
+      return async (template, data) =>
+        Handlebars.compile(await readFile(template))(data);
+
+    // Default, just read the file and return contents
     default:
-      return PUG;
+      return async template => readFile(template);
   }
 };
 

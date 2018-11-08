@@ -10,16 +10,20 @@ const entry = argv => {
   program
     .version('0.1.1', '-v, --version')
     .usage('<config> <output>')
-    .option('-c, --config <file>', 'Path to the config yaml file')
-    .option('-o, --out <file>', 'Path to the output pdf file')
+    .option(
+      '-c, --config <file>',
+      'Path to the config yaml file, defaults to ./puppet.yml'
+    )
+    .option(
+      '-o, --out <file>',
+      'Path to the output pdf file, defaults to output.pdf'
+    )
     .parse(argv);
 
-  if (program.config && program.out) {
-    const { config, out } = program;
-    generatePDF(config, out);
-  } else {
-    console.log('Config and/or output not provided');
-  }
+  if (!program.config) program.config = './puppet.yml';
+  if (!program.out) program.out = 'output.pdf';
+  const { config, out } = program;
+  generatePDF(config, out);
 };
 
 entry(process.argv);

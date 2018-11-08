@@ -22,7 +22,12 @@ module.exports = async (configFile, out) => {
 
   const browser = await puppeteer.launch();
   const page = await browser.newPage();
-  await page.goto(`data:text/html, ${markup}`);
+  await page.setRequestInterception(true);
+  page.on('request', req => req.continue());
+  await page.goto(`data:text/html, ${markup}`, {
+    waitUntil: 'networkidle0',
+    timeout: 60000,
+  });
 
   console.log('Generating PDF...\n');
   await page.pdf({

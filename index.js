@@ -8,7 +8,7 @@ const generatePDF = require('./src/generatePDF');
  */
 const entry = argv => {
   program
-    .version('0.0.1', '-v, --version')
+    .version('0.1.1', '-v, --version')
     .usage('<config> <output>')
     .option('-c, --config <file>', 'Path to the config yaml file')
     .option('-o, --out <file>', 'Path to the output pdf file')

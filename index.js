@@ -2,6 +2,7 @@
 
 const program = require('commander');
 const generatePDF = require('./src/generatePDF');
+const devServer = require('./src/devServer');
 
 /**
  * Program Entry
@@ -30,7 +31,7 @@ const entry = argv => {
     .action(() => {
       isDev = true;
       console.log('Starting dev server...');
-      console.log(program.config, program.out);
+      devServer(program.config).catch(console.log);
     });
 
   program.parse(argv);

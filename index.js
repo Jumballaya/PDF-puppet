@@ -12,16 +12,8 @@ const entry = argv => {
   program
     .version('0.1.1', '-v, --version')
     .usage('<config> <output>')
-    .option(
-      '-c, --config <file>',
-      'Path to the config yaml file, defaults to ./puppet.[yml|json]',
-      'puppet'
-    )
-    .option(
-      '-o, --out <file>',
-      'Path to the output pdf file, defaults to ./output.pdf',
-      'output.pdf'
-    );
+    .option('-c, --config <file>', 'Path to the config yaml file.', 'puppet')
+    .option('-o, --out <file>', 'Path to the output pdf file.', 'output.pdf');
 
   program
     .command('dev')

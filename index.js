@@ -2,7 +2,7 @@
 
 const program = require('commander');
 const generatePDF = require('./src/generatePDF');
-const devServer = require('./src/devServer');
+const devServer = require('./src/dev');
 
 /**
  * Program Entry

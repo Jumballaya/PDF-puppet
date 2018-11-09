@@ -35,3 +35,11 @@ exports.devHost = cfg => {
   }
   return DEFAULT_HOST;
 };
+
+// Get the dev.open field from the config
+exports.devOpen = cfg => {
+  if (cfg.dev) {
+    return cfg.dev.open ? true : false;
+  }
+  return false;
+};

@@ -2,23 +2,35 @@
 
 const program = require('commander');
 const generatePDF = require('./src/generatePDF');
+const devServer = require('./src/dev');
 
 /**
  * Program Entry
  */
 const entry = argv => {
+  let isDev = false;
   program
     .version('0.1.1', '-v, --version')
     .usage('<config> <output>')
-    .option('-c, --config <file>', 'Path to the config yaml file')
-    .option('-o, --out <file>', 'Path to the output pdf file')
-    .parse(argv);
+    .option('-c, --config <file>', 'Path to the config yaml file.', 'puppet')
+    .option('-o, --out <file>', 'Path to the output pdf file.', 'output.pdf');
 
-  if (program.config && program.out) {
+  program
+    .command('dev')
+    .description(
+      'run a development server to render the markup before generating the pdf'
+    )
+    .action(() => {
+      isDev = true;
+      console.log('Starting dev server...');
+      devServer(program.config).catch(console.log);
+    });
+
+  program.parse(argv);
+
+  if (!isDev) {
     const { config, out } = program;
     generatePDF(config, out);
-  } else {
-    console.log('Config and/or output not provided');
   }
 };
 

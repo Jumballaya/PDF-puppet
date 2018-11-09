@@ -4,6 +4,7 @@
 const puppeteer = require('puppeteer');
 const generateMarkup = require('./markup');
 const parseOpts = require('./options');
+const logger = require('./logger');
 
 /**
  * Generate PDF
@@ -13,11 +14,11 @@ const parseOpts = require('./options');
 module.exports = async (configFile, out) => {
   const opts = parseOpts(configFile);
   if (opts === null) {
-    console.log('YAML file could not be read');
+    logger.out('YAML file could not be read');
     return;
   }
 
-  console.log('Generating markup...');
+  logger.out('Generating markup...');
   const markup = await generateMarkup(opts);
 
   const browser = await puppeteer.launch();
@@ -29,7 +30,7 @@ module.exports = async (configFile, out) => {
     timeout: 60000,
   });
 
-  console.log('Generating PDF...\n');
+  logger.out('Generating PDF...\n');
   await page.pdf({
     path: out,
     format: configFile.format || 'A4',

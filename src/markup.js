@@ -23,11 +23,10 @@ const selectMarkupEngine = opts => {
     // Twig
     case 'twig':
       return async (template, data) =>
-        new Promise((resolve, reject) => {
-          Twig.renderFile(template, data, (err, markup) => {
-            if (err) reject(err);
-            resolve(markup);
-          });
+        readFile(template).then(file => {
+          const tpl = Twig.twig({ data: file });
+          const markup = tpl.render(data);
+          return markup;
         });
 
     // Pug

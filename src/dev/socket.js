@@ -6,17 +6,17 @@ const logger = require('../logger');
 const fs = require('fs');
 
 // File Watcher
-const fileWatcher = (yml, action) => {
+const fileWatcher = (cfg, action) => {
   const onChange = file => () => {
     action(file);
   };
 
-  fs.watchFile(yml.template, onChange(yml.template));
-  fs.watchFile(yml.styles, onChange(yml.styles));
+  fs.watchFile(cfg.template, onChange(cfg.template));
+  fs.watchFile(cfg.styles, onChange(cfg.styles));
 };
 
 // Create new server
-const newServer = (extServer, yml) => {
+const newServer = (extServer, cfg) => {
   const wss = new WebSocket.Server({ server: extServer });
 
   wss.on('connection', ws => {
@@ -26,7 +26,7 @@ const newServer = (extServer, yml) => {
     ws.send('Connected to server');
   });
 
-  fileWatcher(yml, file => {
+  fileWatcher(cfg, file => {
     wss.clients.forEach(client => {
       if (client.readyState === WebSocket.OPEN) {
         client.send(`File changed: ${file}... reloading...`);

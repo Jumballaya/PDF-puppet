@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+</head>
+<body>
+  <h1>Twig: {{company}}<h1>
+  <table>
+    <thead>
+      <tr>
+        {% for h in table.headers %}
+          <th>{{h}}</th>
+        {% endfor %}
+      </tr>
+    </thead>
+    <tbody>
+      {% for r in table.body %}
+        <tr>
+          {% for c in r %}
+            <th>{{c}}</th>
+          {% endfor %}
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  <h2>{{total}}</h2>
+</body>
+</html>

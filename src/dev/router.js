@@ -3,15 +3,16 @@
  */
 const generateMarkup = require('../markup');
 const refreshScript = require('./browser-refresh');
+const { devHost, devPort } = require('../util');
 
-const router = yml => ({
+const router = cfg => ({
   // Main route
   home: (req, res) => {
-    generateMarkup(yml)
+    generateMarkup(cfg)
       .then(markup => {
         res.writeHead(200, { 'Content-Type': 'text/html' });
 
-        const refresh = refreshScript('localhost', 8080);
+        const refresh = refreshScript(devHost(cfg), devPort(cfg));
         const out = `${markup}<script>${refresh}</script>`;
 
         res.write(out);

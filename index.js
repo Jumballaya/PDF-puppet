@@ -14,8 +14,8 @@ const entry = argv => {
     .usage('<config> <output>')
     .option(
       '-c, --config <file>',
-      'Path to the config yaml file, defaults to ./puppet.yml',
-      'puppet.yml'
+      'Path to the config yaml file, defaults to ./puppet.[yml|json]',
+      'puppet'
     )
     .option(
       '-o, --out <file>',

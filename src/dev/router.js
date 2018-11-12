@@ -21,7 +21,7 @@ const router = cfg => ({
         res.writeHead(200, { 'Content-Type': 'text/html' });
 
         const refresh = refreshScript(devHost(cfg), devPort(cfg));
-        const out = `${markup}<script>${refresh}</script>`;
+        const out = `${markup.full}<script>${refresh}</script>`;
 
         res.write(out);
         res.end();

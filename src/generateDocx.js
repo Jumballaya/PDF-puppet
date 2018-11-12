@@ -3,26 +3,27 @@
  *
  * Generate Word docx format files
  */
-const htmlDocx = require('html-docx-js');
-const fs = require('fs');
-
+const path = require('path');
+const unoconv = require('unoconv');
 const generateMarkup = require('./markup');
 const logger = require('./logger');
+const { writeFile } = require('./util');
+
+const convert = (file, type) =>
+  new Promise((resolve, reject) => {
+    unoconv.convert(file, type, (err, result) => {
+      if (err) reject(err);
+      else resolve(result);
+    });
+  });
 
 module.exports = async (cfg, out) => {
   logger.out('Generating markup...');
-  const markup = await generateMarkup(cfg);
-  const docx = htmlDocx.asBlob(Buffer.from(markup));
+  //const markup = await generateMarkup(cfg);
+  const docx = await convert(path.resolve('./test.pdf'), 'docx');
 
-  console.log(docx);
+  if (!out) return docx;
 
-  if (!out) {
-    return docx;
-  }
-
-  await fs.writeFile(out, docx, err => {
-    if (err) throw err;
-    logger.out('Docx file saved to ', out);
-  });
+  await writeFile(out, docx);
   return null;
 };

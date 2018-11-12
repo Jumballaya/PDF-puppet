@@ -20,6 +20,19 @@ exports.readFile = file =>
     })
   );
 
+/**
+ * Write File
+ *
+ * Promisified fs.writeFile
+ */
+exports.writeFile = (fp, data) =>
+  new Promise((resolve, reject) =>
+    fs.writeFile(fp, data, err => {
+      if (err) reject(err);
+      else resolve(true);
+    })
+  );
+
 // Get the port from the config
 exports.devPort = cfg => {
   if (cfg.dev) {

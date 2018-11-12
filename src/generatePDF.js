@@ -23,7 +23,7 @@ module.exports = async (opts, out) => {
   const page = await browser.newPage();
   await page.setRequestInterception(true);
   page.on('request', req => req.continue());
-  await page.goto(`data:text/html, ${markup}`, {
+  await page.goto(`data:text/html, ${markup.full}`, {
     waitUntil: 'networkidle0',
     timeout: 60000,
   });

@@ -63,5 +63,9 @@ module.exports = async opts => {
   const styles = `<style>${compiledStyles.css}</style>`;
   const markupEngine = selectMarkupEngine(opts);
   const markup = await markupEngine(opts.template, opts.data);
-  return `${styles}${markup}`;
+  return {
+    styles,
+    markup,
+    full: `${styles}${markup}`,
+  };
 };

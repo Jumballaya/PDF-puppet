@@ -15,7 +15,6 @@
   "dependencies": {
     "commander": "^2.19.0",
     "handlebars": "^4.0.12",
-    "html-docx-js": "^0.3.1",
     "js-yaml": "^3.12.0",
     "mustache": "^3.0.0",
     "node-sass": "^4.9.4",
@@ -23,6 +22,7 @@
     "pug": "^2.0.3",
     "puppeteer": "^1.9.0",
     "twig": "^1.12.0",
+    "unoconv": "^0.1.2",
     "ws": "^6.1.0"
   }
 }

@@ -2,7 +2,7 @@
  * Dev Server Routes
  */
 const generateMarkup = require('../markup');
-const generatePDF = require('../generatePDF');
+const generate = require('../generate');
 const refreshScript = require('./browser-refresh');
 const { devHost, devPort } = require('../util');
 
@@ -32,7 +32,7 @@ const router = cfg => ({
   // Pdf route
   // This route generates a pdf of the finished product
   pdf: (req, res) => {
-    generatePDF(cfg)
+    generate({ ...cfg, outputType: 'pdf' })
       .then(pdf => {
         res.writeHead(200, { 'Content-Type': 'application/pdf' });
         res.write(pdf);

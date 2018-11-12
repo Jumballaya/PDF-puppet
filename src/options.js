@@ -19,7 +19,7 @@ const parseYaml = (fp, silent = false) => {
     cfg.styles = path.resolve(path.dirname(fp), cfg.styles);
     return cfg;
   } catch (e) {
-    if (!silent) logger.out(e);
+    if (!silent) throw e;
     return null;
   }
 };

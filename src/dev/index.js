@@ -7,7 +7,6 @@ const opn = require('opn');
 const router = require('./router');
 const setupSocket = require('./socket');
 
-const parseOpts = require('../options');
 const logger = require('../logger');
 const { devHost, devPort, devOpen } = require('../util');
 
@@ -16,16 +15,19 @@ const handleRequest = cfg => (req, res) => {
   const { url } = req;
   const routes = router(cfg);
 
-  switch (url) {
-    default:
-      routes.home(req, res);
+  // Generate and serve PDF
+  if (url.includes('.pdf')) {
+    routes.pdf(req, res);
+    return;
   }
+
+  // Default HTML
+  routes.home(req, res);
 };
 
 // Default exported function
 // Runs the dev server
-const runDevServer = async configFile => {
-  const cfg = await parseOpts(configFile);
+const runDevServer = async cfg => {
   if (cfg === null) throw new Error('Error with config file, wrong file type.');
 
   const port = devPort(cfg);

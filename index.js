@@ -3,6 +3,7 @@
 const program = require('commander');
 const generatePDF = require('./src/generatePDF');
 const devServer = require('./src/dev');
+const parseOpts = require('./src/options');
 
 /**
  * Program Entry
@@ -23,14 +24,14 @@ const entry = argv => {
     .action(() => {
       isDev = true;
       console.log('Starting dev server...');
-      devServer(program.config).catch(console.log);
+      devServer(parseOpts(program.config)).catch(console.log);
     });
 
   program.parse(argv);
 
   if (!isDev) {
     const { config, out } = program;
-    generatePDF(config, out);
+    generatePDF(parseOpts(config), out).catch(console.log);
   }
 };
 

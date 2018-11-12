@@ -28,10 +28,15 @@ module.exports = async (opts, out) => {
     timeout: 60000,
   });
 
+  const bodyHandle = await page.$('body');
+  const { width, height } = await bodyHandle.boundingBox();
+
   logger.out('Generating PDF...\n');
   const data = await page.pdf({
     path: out,
-    format: opts.format || 'A4',
+    format: opts.format ? opts.format : null,
+    width: opts.width ? opts.width : width + 15,
+    height: opts.height ? opts.height : height + 50,
     printBackground: true,
   });
 

@@ -61,6 +61,9 @@ You can find sample config files in the demo folder. Here is a breakdown of the 
   - `template`: Path to the template file
   - `styles`: Path to the style file
   - `markupEngine`: Markup/Template engine to be used (pug, twig, etc.)
+  - `format`: Print format (e.g. A4, A5, A6, etc.), overrides height and width
+  - `height`: Specify height, defaults to auto-height
+  - `width`: Specify width, defaults to auto-width
   - `dev`: Development settings object
     * `port`: Port for the dev server
     * `host`: Host for the dev server

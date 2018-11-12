@@ -21,6 +21,12 @@ const handleRequest = cfg => (req, res) => {
     return;
   }
 
+  // PDF viewer
+  if (url === '/viewer') {
+    routes.viewer(req, res);
+    return;
+  }
+
   // Default HTML
   routes.home(req, res);
 };

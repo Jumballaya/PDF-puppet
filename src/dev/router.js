@@ -40,6 +40,23 @@ const router = cfg => ({
       })
       .catch(errorRoute(req, res));
   },
+
+  // PDF viewer
+  // This route is a viewer that embeds the PDF
+  viewer: (req, res) => {
+    res.writeHead(200, { 'Content-Type': 'text/html' });
+
+    const refresh = refreshScript(devHost(cfg), devPort(cfg));
+
+    res.write(`<html>
+  <body style="height: 100%; width: 100%; overflow: hidden; margin: 0px; background-color: rgb(82, 86, 89);" cz-shortcut-listen="true">
+    <embed width="100%" height="100%" name="plugin" id="plugin" src="/pdf.pdf" type="application/pdf" internalinstanceid="12">
+    <script>${refresh}</script>
+  </body>
+</html>`);
+
+    res.end();
+  },
 });
 
 module.exports = router;

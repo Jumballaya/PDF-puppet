@@ -1,6 +1,6 @@
 {
   "name": "pdf-puppet",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "generate PDFs from HTML templates",
   "author": "Patrick Burris",
   "license": "ISC",

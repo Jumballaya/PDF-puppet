@@ -27,6 +27,15 @@ Example:
 
 This will build the PDF using the files and data in the invoice.yml file and output it in the invoice.pdf file.
 
+### Dev Server
+
+The dev server has 3 routes:
+
+  - The fallback route that generates the HTML markup in the browser
+  - Any route with `.pdf` in its name generates the pdf data
+  - The route `/viewer` generates a page that shows the pdf and reloads on changes
+
+
 ## Templating engines
 
 The following are supported:

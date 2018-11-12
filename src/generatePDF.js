@@ -13,7 +13,7 @@ const logger = require('./logger');
 module.exports = async (opts, out) => {
   if (opts === null) {
     logger.out('YAML file could not be read');
-    return;
+    return null;
   }
 
   logger.out('Generating markup...');

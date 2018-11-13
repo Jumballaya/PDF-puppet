@@ -1,30 +1,19 @@
 #!/usr/bin/env node
 
 const program = require('commander');
-const generate = require('./src/generate');
-const devServer = require('./src/dev');
-const parseOpts = require('./src/options');
-const logger = require('./src/logger');
+const Documentor = require('./src');
 
 // Descriptions
 const DEV_DESC =
   'run a development server to render the markup before generating the pdf';
-
 const APP_DESC = 'Generate beautiful documents with modern web tools';
 
-// Check Config File
-const cfgAllGood = cfg => {
-  if (!cfg) {
-    return false;
-  }
-  return true;
-};
-
 /**
- * Program Entry
+ * Initialize CLI
  */
-const entry = argv => {
-  let isDev = false;
+const init = () => {
+  const documentor = new Documentor();
+
   program
     .version('0.1.1', '-v, --version')
     .description(APP_DESC)
@@ -36,20 +25,29 @@ const entry = argv => {
     .command('dev')
     .description(DEV_DESC)
     .action(() => {
-      isDev = true;
-      const { config } = program;
-      logger.out('Starting dev server...');
-      devServer(parseOpts(config)).catch(logger.out);
+      documentor.isDev = true;
     });
 
+  return documentor;
+};
+
+/**
+ * Program Entry
+ */
+const entry = argv => {
+  const documentor = init();
   program.parse(argv);
 
-  if (!isDev) {
-    const { config, out } = program;
-    const cfg = parseOpts(config);
+  const { config, out } = program;
+  documentor.setConfig(config);
+
+  if (!documentor.isDev) {
+    const { cfg } = documentor;
     const outFile = `${out}.${cfg.outputType ? cfg.outputType : 'pdf'}`;
-    generate(cfg, outFile).catch(logger.out);
+    documentor.setOutput(outFile);
   }
+
+  documentor.run();
 };
 
 entry(process.argv);

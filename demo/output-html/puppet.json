@@ -3,7 +3,7 @@
   "template": "invoice.twig",
   "styles": "invoice.scss",
   "markupEngine": "twig",
-  "outputType": "docx",
+  "outputType": "html",
   "dev": {
     "port": 3000,
     "open": true

@@ -1,7 +1,7 @@
 /**
  * Dev Server Routes
  */
-const generateMarkup = require('../markup');
+const generateMarkup = require('../generate/markup');
 const generate = require('../generate');
 const refreshScript = require('./browser-refresh');
 const { devHost, devPort } = require('../util');

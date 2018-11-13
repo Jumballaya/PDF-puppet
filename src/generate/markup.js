@@ -8,7 +8,7 @@ const Mustache = require('mustache');
 const Handlebars = require('handlebars');
 const sass = require('node-sass');
 
-const { readFile } = require('./util');
+const { readFile } = require('../util');
 
 /**
  * Select Markup Engine

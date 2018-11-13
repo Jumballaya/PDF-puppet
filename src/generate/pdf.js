@@ -3,21 +3,16 @@
  */
 const puppeteer = require('puppeteer');
 const generateMarkup = require('./markup');
-const logger = require('./logger');
+const logger = require('../logger');
 
 /**
  * Generate PDF
  *
  * Generates the PDF from the information in the yaml config
  */
-module.exports = async (opts, out) => {
-  if (opts === null) {
-    logger.out('YAML file could not be read');
-    return null;
-  }
-
+module.exports = async (cfg, out) => {
   logger.out('Generating markup...');
-  const markup = await generateMarkup(opts);
+  const markup = await generateMarkup(cfg);
 
   const browser = await puppeteer.launch();
   const page = await browser.newPage();
@@ -34,9 +29,9 @@ module.exports = async (opts, out) => {
   logger.out('Generating PDF...\n');
   const data = await page.pdf({
     path: out,
-    format: opts.format ? opts.format : null,
-    width: opts.width ? opts.width : width + 15,
-    height: opts.height ? opts.height : height + 50,
+    format: cfg.format ? cfg.format : null,
+    width: cfg.width ? cfg.width : width + 15,
+    height: cfg.height ? cfg.height : height + 50,
     printBackground: true,
   });
 

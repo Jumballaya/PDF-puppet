@@ -64,6 +64,7 @@ You can find sample config files in the demo folder. Here is a breakdown of the 
   - `format`: Print format (e.g. A4, A5, A6, etc.), overrides height and width
   - `height`: Specify height, defaults to auto-height
   - `width`: Specify width, defaults to auto-width
+  - `outputType`: Specify your target output type (html, pdf), defaults to pdf
   - `dev`: Development settings object
     * `port`: Port for the dev server
     * `host`: Host for the dev server
